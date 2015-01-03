@@ -7,10 +7,10 @@ r = praw.Reddit('Rammus OK Bot by /u/Xwerve and /u/liquidized')
 username = accounts.rammus_ok_bot_user
 password = accounts.rammus_ok_bot_pass
 subreddit = r.get_subreddit('thomascirclejerk')
-subreddits = 'thomascirclejerk'
+comment_subreddits = 'leagueoflegends'
 r.login(username, password)
 posts = subreddit.get_new()
-comments = r.get_comments(subreddits)
+comments = r.get_comments(comment_subreddits)
 key_phrase = ['ok', 'ok.', 'taunt', 'spiky armadillo']
 key_words = ['rammus']
 link_words = ['thomas']
