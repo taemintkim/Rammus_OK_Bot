@@ -15,7 +15,7 @@ key_phrase = ['ok', 'ok.', 'taunt', 'spiky armadillo']
 key_words = ['rammus']
 link_words = ['thomas']
 comment_ids = []
-sub_ids = []
+post_ids = []
 
 while True:
 	if len(comment_ids) > 100:
@@ -44,4 +44,13 @@ while True:
 			comment_ids.append(str(comment.id))
 			comment.reply('ok')
 	for word in link_words:
-		if word in str(post).lower() and str(comment.author) != username and str(comment.id) not in comment_ids:
+		if (word in str(post).lower() or word in str(post.selftext).lower()) and str(post.id) not in post_ids:
+			current_time = datetime.datetime.now().time()
+			print(post, 'posted by', post.author, 'at', current_time.isoformat())
+			post.upvote()
+			post_ids.append(str(post.id))
+			try:
+				post.add_comment('ok')
+			except praw.errors.APIException:
+				print("POST TOO OLD")
+
