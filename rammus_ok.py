@@ -27,7 +27,6 @@ while True:
 	for word in key_words:
 		if word in str(comment).lower() and str(comment.author) != username and str(comment.id) not in comment_ids:
 			print(comment, 'posted by', comment.author)
-			print("hello")
 			comment.upvote()
 			comment_ids.append(str(comment.id))
 			comment.reply('ok')
