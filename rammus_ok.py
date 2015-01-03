@@ -6,14 +6,13 @@ import datetime
 r = praw.Reddit('Rammus OK Bot by /u/Xwerve and /u/liquidized')
 username = accounts.rammus_ok_bot_user
 password = accounts.rammus_ok_bot_pass
-subreddit = r.get_subreddit('thomascirclejerk')
+subreddit = r.get_subreddit('leagueoflegends')
 comment_subreddits = 'leagueoflegends'
 r.login(username, password)
 posts = subreddit.get_new()
 comments = r.get_comments(comment_subreddits)
-key_phrase = ['ok', 'ok.', 'taunt', 'spiky armadillo']
-key_words = ['rammus']
-link_words = ['thomas']
+key_phrase = ['ok', 'ok.', 'taunt']
+key_words = ['rammus', 'spiky armadillo']
 comment_ids = []
 post_ids = []
 
@@ -43,13 +42,13 @@ while True:
 			comment.upvote()
 			comment_ids.append(str(comment.id))
 			comment.reply('ok')
-	for word in link_words:
+	for word in key_words:
 		if (word in str(post).lower() or word in str(post.selftext).lower()) and str(post.id) not in post_ids:
 			current_time = datetime.datetime.now().time()
-			print(post, 'posted by', post.author, 'at', current_time.isoformat())
-			post.upvote()
-			post_ids.append(str(post.id))
 			try:
+				print(post, 'posted by', post.author, 'at', current_time.isoformat())
+				post.upvote()
+				post_ids.append(str(post.id))
 				post.add_comment('ok')
 			except praw.errors.APIException:
 				print("POST TOO OLD")
