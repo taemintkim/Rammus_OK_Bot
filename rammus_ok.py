@@ -1,6 +1,7 @@
 import accounts
 import praw
 import sys
+import datetime
 
 r = praw.Reddit('Rammus OK Bot by /u/Xwerve and /u/liquidized')
 username = accounts.rammus_ok_bot_user
@@ -8,7 +9,7 @@ password = accounts.rammus_ok_bot_pass
 subreddits = 'leagueoflegends'
 r.login(username, password)
 comments = r.get_comments(subreddits)
-key_phrase = ['ok', 'ok.']
+key_phrase = ['ok', 'ok.', 'taunt', 'spiky armadillo']
 key_words = ['rammus']
 comment_ids = []
 sub_ids = []
@@ -31,7 +32,8 @@ while True:
 			comment.reply('ok')
 	for word in key_words:
 		if word in str(comment).lower() and str(comment.author) != username and str(comment.id) not in comment_ids:
-			print(comment, 'posted by', comment.author)
+			current_time = datetime.datetime.now().time()
+			print(comment, 'posted by', comment.author, 'at', current_time.isoformat())
 			comment.upvote()
 			comment_ids.append(str(comment.id))
 			comment.reply('ok')
