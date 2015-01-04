@@ -12,7 +12,7 @@ def initialize():
 	subreddit = r.get_subreddit('leagueoflegends')
 	comment_subreddits = 'leagueoflegends'
 	r.login(username, password)
-	posts = subreddit.get_new()
+	posts = subreddit.get_new(limit=5)
 	comments = r.get_comments(comment_subreddits)
 initialize()
 key_phrase = ['ok', 'ok.', 'taunt', 'ok ', ' ok', 'ok  ', ' ok ']
@@ -29,7 +29,7 @@ while True:
 		comment = next(comments)
 		post = next(posts)
 	except StopIteration:
-		posts = subreddit.get_new()
+		posts = subreddit.get_new(limit=5)
 		comments = r.get_comments('leagueoflegends')
 		comment = next(comments)
 		post = next(posts)
