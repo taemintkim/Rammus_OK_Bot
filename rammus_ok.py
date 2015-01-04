@@ -19,6 +19,8 @@ post_ids = []
 while True:
 	if len(comment_ids) > 100:
 		comment_ids.pop(0)
+	if len(post_ids) > 100:
+		post_ids.pop(0)
 	try:
 		comment = next(comments)
 		post = next(posts)
